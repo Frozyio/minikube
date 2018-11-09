@@ -121,12 +121,10 @@ func (k *KubeadmBootstrapper) StartCluster(k8s config.KubernetesConfig) error {
 		Preflights          []string
 		DNSAddon            string
 	}{
-		KubeadmConfigFile: constants.KubeadmConfigFile,
-		SkipPreflightChecks: !VersionIsBetween(version,
-			semver.MustParse("1.9.0-alpha.0"),
-			semver.Version{}),
-		Preflights: constants.Preflights,
-		DNSAddon:   "kube-dns",
+		KubeadmConfigFile:   constants.KubeadmConfigFile,
+		SkipPreflightChecks: true,
+		Preflights:          constants.Preflights,
+		DNSAddon:            "kube-dns",
 	}
 	if version.GTE(semver.MustParse("1.12.0")) {
 		templateContext.DNSAddon = "coredns"
